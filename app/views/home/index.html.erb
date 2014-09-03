@@ -30,7 +30,7 @@
           <div class="col-2">
             <div class="pane">
               <div><%= image_tag 'map_map.png' %></div>
-              <div><a href="http://m.map.naver.com/map.nhn?lng=127.0168471&lat=37.5894512&dlevel=11&title=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%B3%B4%EB%AC%B8%EB%A1%9C%20168&isShowPolygon=false&rcode=09290115&isDetailAddress=true" target="_blank" id="link-naver-map"><%= image_tag 'map_naver_map_button.png' %></a></div>
+              <div><a href="http://m.map.naver.com/map.nhn?lng=127.0168471&lat=37.5894512&dlevel=11&title=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%B3%B4%EB%AC%B8%EB%A1%9C%20168&isShowPolygon=false&rcode=09290115&isDetailAddress=true" id="link-naver-map"><%= image_tag 'map_naver_map_button.png' %></a></div>
             </div>
             <div class="pane">
               <div class="menu">
@@ -47,7 +47,7 @@
               <% (1..13).each do |i| %>
                 <div class="pane">
                   <div class="photo">
-                    <a href='/photos?photo_index=<%= i %>' target="_self" class="link_photo_detail">
+                    <a href='/photos?photo_index=<%= i %>' class="link_photo_detail">
                       <%= image_tag "photos/thumbnail/#{i}.jpg" %>
                     </a>
                   </div>
@@ -58,7 +58,7 @@
               <% (14..26).each do |i| %>
                 <div class="pane">
                   <div class="photo">
-                    <a href='/photos?photo_index=<%= i %>' target="_self" class="link_photo_detail">
+                    <a href='/photos?photo_index=<%= i %>' class="link_photo_detail">
                       <%= image_tag "photos/thumbnail/#{i}.jpg" %>
                     </a>
                   </div>
