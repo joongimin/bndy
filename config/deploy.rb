@@ -1,5 +1,7 @@
 lock '3.2.1'
 
+require 'settingslogic'
+
 set :application, 'bndy'
 set :user, 'ubuntu'
 set :github, 'joongimin/bndy'
