@@ -1,0 +1,173 @@
+@import '../lib/common';
+@import 'compass/css3/transition';
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+  font-family: Arial, '나눔고딕', 'NanumGothic', 'NanumGothicOTF', 'lucida grande', tahoma, arial, sans-serif;
+  background-image: image-url("main_background.png");
+  margin: 0;
+  font-size: 12px;
+}
+
+div, a {
+  box-sizing: border-box;
+}
+
+a {
+  display: inline-block;
+}
+
+#main {
+  white-space: nowrap;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
+  padding: 8px;
+}
+
+.pane {
+  position: relative;
+  margin-bottom: 10px;
+  line-height: 0;
+  background-color: white;
+}
+
+img {
+  width: 100%;
+}
+
+.col-1, .col-2 {
+  float: left;
+}
+
+.col-1 {
+  width: 50%;
+  padding: 0 3px;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+
+  .pane {
+    margin-bottom: 5px;
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.col-2 {
+  width: 100%;
+}
+
+.menu {
+  @include clearfix;
+  padding: 0 15px;
+
+  a {
+    width: 33%;
+    float: left;
+    vertical-align: middle;
+    padding: 10px 20px;
+
+    img {
+      vertical-align: middle;
+    }
+  }
+}
+
+.photo {
+  padding: 5px;
+}
+
+.page-1 {
+  -webkit-transform: translate3d(0%, 0px, 0px);
+}
+
+.page-2 {
+  -webkit-transform: translate3d(100%, 0px, 0px);
+}
+
+.page-3 {
+  -webkit-transform: translate3d(200%, 0px, 0px);
+}
+
+.page-4 {
+  -webkit-transform: translate3d(300%, 0px, 0px);
+}
+
+#link-naver-map {
+  padding: 0 10px 20px 10px;
+}
+
+#textarea-container {
+  position: relative;
+
+  div {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+  }
+}
+
+textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  resize: none;
+}
+
+.pane-item {
+  margin-bottom: 10px;
+}
+
+.pane-new-comment {
+  padding: 10px;
+}
+
+#board-title {
+  padding: 5px 40px 0 40px;
+}
+
+.pane-comment {
+  line-height: normal;
+  padding: 5px;
+  color: #777;
+  @include transition(opacity 0.22s ease);
+
+  .message {
+    padding: 20px;
+    background-image: image-url("stitch_background.png");
+    background-repeat: repeat-y;
+    background-size: 2px 14px;
+  }
+
+  .created-at {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
+  }
+}
+
+.comment-height {
+  opacity: 0;
+  height: 0;
+  @include transition(height 0.22s ease);
+}

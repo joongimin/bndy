@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>김빛나 &amp; 한대용</title>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="main">
+      <div id="page-container">
+        <div class="page page-1">
+          <div class="col-2">
+            <div class="pane">
+              <%= image_tag 'greeting_title.png' %>
+            </div>
+            <div class="pane">
+              <%= image_tag 'greeting_intro.png' %>
+            </div>
+            <div class="pane">
+              <div class="menu">
+                <a href="#" class="link-map"><%= image_tag 'menu_map.png' %></a>
+                <a href="#" class="link-photos"><%= image_tag 'menu_photos.png' %></a>
+                <a href="#" class="link-board"><%= image_tag 'menu_board.png' %></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page page-2">
+          <div class="col-2">
+            <div class="pane">
+              <div><%= image_tag 'map_map.png' %></div>
+              <div><a href="#" id="link-naver-map"><%= image_tag 'map_naver_map_button.png' %></a></div>
+            </div>
+            <div class="pane">
+              <div class="menu">
+                <a href="#" class="link-greeting"><%= image_tag 'menu_greeting.png' %></a>
+                <a href="#" class="link-photos"><%= image_tag 'menu_photos.png' %></a>
+                <a href="#" class="link-board"><%= image_tag 'menu_board.png' %></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page page-3">
+          <div class="row">
+            <div class="col-1">
+              <% (1..13).each do |i| %>
+                <div class="pane">
+                  <div class="photo">
+                    <%= image_tag "photos/thumbnail/#{i}.jpg" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-1">
+              <% (14..27).each do |i| %>
+                <div class="pane">
+                  <div class="photo">
+                    <%= image_tag "photos/thumbnail/#{i}.jpg" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="pane">
+              <div class="menu">
+                <a href="#" class="link-greeting"><%= image_tag 'menu_greeting.png' %></a>
+                <a href="#" class="link-map"><%= image_tag 'menu_map.png' %></a>
+                <a href="#" class="link-board"><%= image_tag 'menu_board.png' %></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page page-4">
+          <div class="col-2">
+            <div class="pane pane-new-comment">
+              <div class="pane-item" id="board-title"><%= image_tag 'board_title.png' %></div>
+              <%= form_for Comment.new, remote: true do |f| %>
+                <div id="textarea-container" class="pane-item">
+                  <%= image_tag 'board_field_background.png' %>
+                  <div>
+                    <%= f.text_area :message, maxlength: Settings.max_comment_message_length %>
+                  </div>
+                </div>
+                <a href="#" class="link-submit pane-item">
+                  <%= image_tag 'board_submit_button.png' %>
+                </a>
+              <% end %>
+            </div>
+            <div id="comments">
+            </div>
+            <div class="pane">
+              <div class="menu">
+                <a href="#" class="link-greeting"><%= image_tag 'menu_greeting.png' %></a>
+                <a href="#" class="link-map"><%= image_tag 'menu_map.png' %></a>
+                <a href="#" class="link-photos"><%= image_tag 'menu_photos.png' %></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= javascript_include_tag 'application' %>
+  </body>
+</html>

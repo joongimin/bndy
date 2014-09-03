@@ -1,0 +1,8 @@
+defaults: &defaults
+  max_comment_message_length: 10000
+
+development:
+  <<: *defaults
+
+production:
+  <<: *defaults
