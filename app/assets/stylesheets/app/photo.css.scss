@@ -1,6 +1,10 @@
 @import '../lib/common';
 @import 'compass/css3/transition';
 
+body#black-background {
+  background-color: #111;
+}
+
 #photos {
   white-space: nowrap;
   opacity: 1;
