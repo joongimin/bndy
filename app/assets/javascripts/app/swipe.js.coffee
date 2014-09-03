@@ -34,11 +34,8 @@ class Swipe
       threshold = 20
       if x > threshold || -threshold > x
         @touch.state = 2
-        page_no = @$main.data("page-no")
         @touch.x = touch.screenX
         @touch.w = @$main.width() * 0.9
-        @touch.min = @touch.w * (page_no - 2)
-        @touch.max = @touch.w * page_no
         @page_container.style["pointer-events"] = "none"
       else
         e.preventDefault()
@@ -46,10 +43,10 @@ class Swipe
 
     if @touch.state == 2
       x = touch.screenX - @touch.x
-      if x < @touch.min
-        x = @touch.min
-      else if x > @touch.max
-        x = @touch.max
+      if x < -@touch.w
+        x = -@touch.w
+      else if x > @touch.w
+        x = @touch.w
       @page_container.style["-webkit-transform"] = "translate3d(" + x + "px, 0, 0)"
 
       e.preventDefault()
