@@ -9,7 +9,8 @@ class Swipe
     @page_container = document.getElementById("page-container")
     @$page_container = $(@page_container)
     @total_pages = @$page_container.data("total-pages")
-    @max_swipe = @$main.width() * (@$page_container.data("page-scale") || 1)
+    @page_scale = @$page_container.data("page-scale") || 1
+    @max_swipe = @$main.width() * @page_scale
 
     @main.addEventListener "touchstart", (e) -> app.swipe.touchstart(e)
     @main.addEventListener "touchmove", (e) -> app.swipe.touchmove(e)
@@ -76,7 +77,7 @@ class Swipe
 
   swipe: (offset) ->
     @$page_container.addClass("animating")
-    @page_container.style["-webkit-transform"] = "translate3d(" + (90 * offset) + "%, 0, 0)"
+    @page_container.style["-webkit-transform"] = "translate3d(" + (100 * @page_scale * offset) + "%, 0, 0)"
     setTimeout (->
       app.swipe.$page_container.removeClass("animating")
       app.swipe.page_container.style["-webkit-transform"] = "translate3d(0, 0, 0)"
