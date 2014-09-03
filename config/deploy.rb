@@ -11,7 +11,6 @@ set :ssh_options, {forward_agent: true}
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system backups}
 set :rbenv_ruby, '2.1.2'
-set :format, :notification
 set :secrets, Settingslogic.new('config/secrets.yml')
 
 # in RAILS_ROOT/config/deploy.rb:
