@@ -7,9 +7,9 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div id="main">
+    <div id="main" data-page-no="1">
       <div id="page-container">
-        <div class="page page-1">
+        <div class="page page-1" data-page="1" id="page-greeting">
           <div class="col-2">
             <div class="pane">
               <%= image_tag 'greeting_title.png' %>
@@ -19,29 +19,29 @@
             </div>
             <div class="pane">
               <div class="menu">
-                <a href="#" class="link-map"><%= image_tag 'menu_map.png' %></a>
-                <a href="#" class="link-photos"><%= image_tag 'menu_photos.png' %></a>
-                <a href="#" class="link-board"><%= image_tag 'menu_board.png' %></a>
+                <a class="link-swipe" data-target="map"><%= image_tag 'menu_map.png' %></a>
+                <a class="link-swipe" data-target="photos"><%= image_tag 'menu_photos.png' %></a>
+                <a class="link-swipe" data-target="board"><%= image_tag 'menu_board.png' %></a>
               </div>
             </div>
           </div>
         </div>
-        <div class="page page-2">
+        <div class="page page-2" data-page="2" id="page-map">
           <div class="col-2">
             <div class="pane">
               <div><%= image_tag 'map_map.png' %></div>
-              <div><a href="#" id="link-naver-map"><%= image_tag 'map_naver_map_button.png' %></a></div>
+              <div><a id="link-naver-map"><%= image_tag 'map_naver_map_button.png' %></a></div>
             </div>
             <div class="pane">
               <div class="menu">
-                <a href="#" class="link-greeting"><%= image_tag 'menu_greeting.png' %></a>
-                <a href="#" class="link-photos"><%= image_tag 'menu_photos.png' %></a>
-                <a href="#" class="link-board"><%= image_tag 'menu_board.png' %></a>
+                <a class="link-swipe" data-target="greeting"><%= image_tag 'menu_greeting.png' %></a>
+                <a class="link-swipe" data-target="photos"><%= image_tag 'menu_photos.png' %></a>
+                <a class="link-swipe" data-target="board"><%= image_tag 'menu_board.png' %></a>
               </div>
             </div>
           </div>
         </div>
-        <div class="page page-3">
+        <div class="page page-3" data-page="3" id="page-photos">
           <div class="row">
             <div class="col-1">
               <% (1..13).each do |i| %>
@@ -65,14 +65,14 @@
           <div class="col-2">
             <div class="pane">
               <div class="menu">
-                <a href="#" class="link-greeting"><%= image_tag 'menu_greeting.png' %></a>
-                <a href="#" class="link-map"><%= image_tag 'menu_map.png' %></a>
-                <a href="#" class="link-board"><%= image_tag 'menu_board.png' %></a>
+                <a class="link-swipe" data-target="greeting"><%= image_tag 'menu_greeting.png' %></a>
+                <a class="link-swipe" data-target="map"><%= image_tag 'menu_map.png' %></a>
+                <a class="link-swipe" data-target="board"><%= image_tag 'menu_board.png' %></a>
               </div>
             </div>
           </div>
         </div>
-        <div class="page page-4">
+        <div class="page page-4" data-page="4" id="page-board">
           <div class="col-2">
             <div class="pane pane-new-comment">
               <div class="pane-item" id="board-title"><%= image_tag 'board_title.png' %></div>
@@ -83,7 +83,7 @@
                     <%= f.text_area :message, maxlength: Settings.max_comment_message_length %>
                   </div>
                 </div>
-                <a href="#" class="link-submit pane-item">
+                <a class="link-submit" data-target="submit pane-item">
                   <%= image_tag 'board_submit_button.png' %>
                 </a>
               <% end %>
@@ -92,9 +92,9 @@
             </div>
             <div class="pane">
               <div class="menu">
-                <a href="#" class="link-greeting"><%= image_tag 'menu_greeting.png' %></a>
-                <a href="#" class="link-map"><%= image_tag 'menu_map.png' %></a>
-                <a href="#" class="link-photos"><%= image_tag 'menu_photos.png' %></a>
+                <a class="link-swipe" data-target="greeting"><%= image_tag 'menu_greeting.png' %></a>
+                <a class="link-swipe" data-target="map"><%= image_tag 'menu_map.png' %></a>
+                <a class="link-swipe" data-target="photos"><%= image_tag 'menu_photos.png' %></a>
               </div>
             </div>
           </div>
