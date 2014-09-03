@@ -4,9 +4,13 @@
 
 body {
   font-family: Arial, '나눔고딕', 'NanumGothic', 'NanumGothicOTF', 'lucida grande', tahoma, arial, sans-serif;
-  background-image: image-url("main_background.png");
   margin: 0;
   font-size: 12px;
+
+  &#grey-tile {
+    background-color: #d4d4d4;
+    background-image: image-url("main_background.png");
+  }
 }
 
 div, a {
@@ -16,6 +20,7 @@ div, a {
 a {
   display: inline-block;
 }
+
 
 #main {
   position: absolute;
@@ -51,6 +56,7 @@ a {
   position: relative;
   margin-bottom: 10px;
   line-height: 0;
+  box-shadow: 0 2px 3px rgba(0,0,0,.15);
   background-color: white;
 }
 

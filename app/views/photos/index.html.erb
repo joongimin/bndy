@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>김빛나 &amp; 한대용</title>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <%= csrf_meta_tags %>
+  </head>
+  <body id="black-background">
+    <%= content_tag :div, class: 'hidden', id: 'photos', data: {index: @photo_index} do %>
+      <div id="page-container">
+        <% (1..26).each do |i| %>
+          <div class="photo page page-<%= i %>" id="page-<%= i %>" style="-webkit-transform: translate3d(<%= (i - 1) * 100 %>%, 0px, 0px)">
+            <div class="col-2">
+              <div class="photo_pane">
+                <%= image_tag "photos/origin/#{i}.jpg" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div id="photo-close">
+        닫기
+      </div>
+      <div id="photo-index">
+        <span id="photo-index-value"><%= @photo_index %></span> / 26
+      </div>
+    <% end %>
+    <%= javascript_include_tag 'application' %>
+  </body>
+</html>
