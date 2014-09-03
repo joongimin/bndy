@@ -6,26 +6,34 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
     <%= csrf_meta_tags %>
   </head>
-  <body id="black-background">
-    <%= content_tag :div, class: 'hidden', id: 'photos', data: {index: @photo_index} do %>
-      <div id="page-container">
-        <% (1..26).each do |i| %>
-          <div class="photo page page-<%= i %>" id="page-<%= i %>" style="-webkit-transform: translate3d(<%= (i - 1) * 100 %>%, 0px, 0px)">
-            <div class="col-2">
-              <div class="photo_pane">
-                <%= image_tag "photos/origin/#{i}.jpg" %>
-              </div>
-            </div>
-          </div>
+  <body class="photos">
+    <div id="main">
+      <%= content_tag :div, id: 'page-container', data: {total_pages: @photos_count} do %>
+        <% (1..5).each do |page| %>
+          <% photo_index = @photo_index + page - 3 %>
+          <% photo_index += @photos_count if photo_index < 1 %>
+          <%= content_tag :div, class: "page page-#{page}", data: {page: page, photo_index: photo_index} do %>
+            <%= image_tag "photos/origin/#{photo_index}.jpg", class: 'photo without-margin' %>
+          <% end %>
         <% end %>
-      </div>
+        <% (6..@photos_count).each do |page| %>
+          <% photo_index = @photo_index + page - 3 %>
+          <% photo_index -= @photos_count if photo_index > @photos_count %>
+          <%= content_tag :div, class: "page page-#{page}", data: {page: page, photo_index: photo_index} do %>
+            <%= content_tag :image, nil, class: 'photo without-url without-margin', data: {url: image_url("photos/origin/#{photo_index}.jpg")} %>
+          <% end %>
+        <% end %>
+      <% end %>
       <div id="photo-close">
         닫기
       </div>
       <div id="photo-index">
-        <span id="photo-index-value"><%= @photo_index %></span> / 26
+        <span id="photo-index-value"><%= @photo_index %></span> / <%= @photos_count %>
       </div>
-    <% end %>
+    </div>
     <%= javascript_include_tag 'application' %>
+    <script>
+    app.photo.index();
+    </script>
   </body>
 </html>

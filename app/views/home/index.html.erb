@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
     <%= csrf_meta_tags %>
   </head>
-  <body id="grey-tile">
+  <body class="home">
     <div id="main">
-      <div id="page-container">
-        <div class="page page-1" data-page="1" id="page-greeting">
+      <div id="page-container" data-page-scale="0.9" data-total-pages="4">
+        <div class="page page-3" data-page="3" id="page-greeting">
           <div class="col-2">
             <div class="pane">
               <%= image_tag 'greeting_title.png' %>
@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <div class="page page-2" data-page="2" id="page-map">
+        <div class="page page-4" data-page="4" id="page-map">
           <div class="col-2">
             <div class="pane">
               <div><%= image_tag 'map_map.png' %></div>
@@ -41,7 +41,7 @@
             </div>
           </div>
         </div>
-        <div class="page page-3" data-page="3" id="page-photos">
+        <div class="page page-1" data-page="1" id="page-photos">
           <div class="row">
             <div class="col-1">
               <% (1..13).each do |i| %>
@@ -76,7 +76,7 @@
             </div>
           </div>
         </div>
-        <div class="page page-4" data-page="4" id="page-board">
+        <div class="page page-2" data-page="2" id="page-board">
           <div class="col-2">
             <div class="pane pane-new-comment">
               <div class="pane-item" id="board-title"><%= image_tag 'board_title.png' %></div>

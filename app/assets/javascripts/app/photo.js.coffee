@@ -1,22 +1,51 @@
 class Photo
+  index: ->
+    $(document).on "page:loaded", (e) ->
+      $("#photo-index-value").text($(".page-3").data("photo-index"))
+      for i in [1...5]
+        $(".page-" + i).find("img.without-margin").each ->
+          app.photo.center_align($(this))
+
+    $(window).load ->
+      $("#main").css({opacity: 1});
+      $("img.without-url").each ->
+        $photo = $(this)
+        $photo.attr("src", $photo.data("url")).removeClass("without-url")
+
   set_position: (index) ->
     document.body.scrollLeft = (index - 1) * window.innerWidth;
 
-  center_align: ->
-    viewport_height = window.innerHeight
-    for i in [1..26]
-      $page = $("#page-" + i)
-      page_hight = $page.height()
-      if viewport_height > page_hight
-        $page.css('margin-top',((viewport_height - page_hight) * 0.5) + 'px');
+  center_align: ($photo) ->
+    app.photo.onload $photo, ->
+      photo_height = $photo.height()
+      if window.innerHeight > photo_height
+        $photo.css(marginTop: (window.innerHeight - photo_height) * 0.5).removeClass("without-margin")
+
+  onload: ($photo, callback) ->
+    if $photo[0].complete
+      callback()
+    else
+      interval_id = null
+      loaded = false
+      finished = ->
+        if !loaded
+          loaded = true
+          callback()
+          clearInterval(interval_id)
+          interval_id = null
+
+      interval_id = setInterval (->
+        if $photo[0].complete
+          finished()
+      ), 400
+
+      $photo.one "load", ->
+        finished()
+
+      $photo.one "error", ->
+        finished()
 
 app.photo = new Photo
 
-window.onload = ->
-  $photos = $("#photos")
-  if $photos.length > 0
-    $("#photo-close").click ->
-      window.history.back()
-    app.photo.center_align()
-    app.photo.set_position($photos.data("index"))
-    $photos.removeClass("hidden")
+$("#photo-close").click ->
+  window.history.back()

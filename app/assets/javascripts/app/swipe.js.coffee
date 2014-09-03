@@ -1,6 +1,5 @@
 class Swipe
   constructor: ->
-    @total_pages = 4
     @touch = {
       state: 0,
     }
@@ -9,6 +8,8 @@ class Swipe
     @$main = $(@main)
     @page_container = document.getElementById("page-container")
     @$page_container = $(@page_container)
+    @total_pages = @$page_container.data("total-pages")
+    @max_swipe = @$main.width() * (@$page_container.data("page-scale") || 1)
 
     @main.addEventListener "touchstart", (e) -> app.swipe.touchstart(e)
     @main.addEventListener "touchmove", (e) -> app.swipe.touchmove(e)
@@ -18,7 +19,7 @@ class Swipe
     $(document).on "page:loaded", (e) -> app.swipe.pageload(e)
 
   pageload: (e) ->
-    @$main.height($(".page-1").height() + 10)
+    @$main.height($(".page-3").height() + 10)
 
   touchstart: (e) ->
     if e.touches.length == 1
@@ -37,7 +38,6 @@ class Swipe
         if x > threshold || -threshold > x
           @touch.state = 2
           @touch.x = touch.screenX
-          @touch.w = @$main.width() * 0.9
           @page_container.style["pointer-events"] = "none"
         e.preventDefault()
         e.stopPropagation()
@@ -47,10 +47,10 @@ class Swipe
     if @touch.state == 2
       touch = e.touches[0]
       x = touch.screenX - @touch.x
-      if x < -@touch.w
-        x = -@touch.w
-      else if x > @touch.w
-        x = @touch.w
+      if x < -@max_swipe
+        x = -@max_swipe
+      else if x > @max_swipe
+        x = @max_swipe
       @page_container.style["-webkit-transform"] = "translate3d(" + x + "px, 0, 0)"
 
       e.preventDefault()
@@ -61,9 +61,9 @@ class Swipe
       touch = e.changedTouches[0]
       @page_container.style["pointer-events"] = "auto"
       x = touch.screenX - @touch.x
-      if x > @touch.w * 0.2
+      if x > @max_swipe * 0.2
         @swipe(1)
-      else if x < @touch.w * -0.2
+      else if x < @max_swipe * -0.2
         @swipe(-1)
       else
         @swipe(0)
@@ -99,7 +99,8 @@ class Swipe
 
 
 app.swipe = new Swipe
-$(document).trigger("page:loaded")
+$(document).ready ->
+  $(document).trigger("page:loaded")
 
 $(".link-swipe").click ->
   app.swipe.goto($(this).data("target"))

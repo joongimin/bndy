@@ -1,22 +1,25 @@
-@import '../lib/common';
 @import 'compass/css3/transition';
 
-body#black-background {
+body.photos {
   background-color: #111;
-}
 
-#photos {
-  white-space: nowrap;
-  opacity: 1;
-  @include transition(opacity 0.8s ease);
-
-   &.hidden {
+  #main {
     opacity: 0;
-   }
-}
-.page.photo {
-  width: 100%;
-  padding: 3px;
+    white-space: nowrap;
+    @include transition(opacity 0.8s ease);
+    height: 100% !important;
+  }
+
+  #page-container {
+    height: 100%;
+    left: 0;
+  }
+
+  .page {
+    width: 100%;
+    height: 100%;
+    padding: 0 3px;
+  }
 }
 
 #photo-close {
