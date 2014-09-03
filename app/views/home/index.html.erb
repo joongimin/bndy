@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body id="grey-tile">
     <div id="main">
       <div id="page-container">
         <div class="page page-1">
@@ -47,16 +47,20 @@
               <% (1..13).each do |i| %>
                 <div class="pane">
                   <div class="photo">
-                    <%= image_tag "photos/thumbnail/#{i}.jpg" %>
+                    <a href='/photos?photo_index=<%= i %>' target="_self" class="link_photo_detail">
+                      <%= image_tag "photos/thumbnail/#{i}.jpg" %>
+                    </a>
                   </div>
                 </div>
               <% end %>
             </div>
             <div class="col-1">
-              <% (14..27).each do |i| %>
+              <% (14..26).each do |i| %>
                 <div class="pane">
                   <div class="photo">
-                    <%= image_tag "photos/thumbnail/#{i}.jpg" %>
+                    <a href='/photos?photo_index=<%= i %>' target="_self" class="link_photo_detail">
+                      <%= image_tag "photos/thumbnail/#{i}.jpg" %>
+                    </a>
                   </div>
                 </div>
               <% end %>

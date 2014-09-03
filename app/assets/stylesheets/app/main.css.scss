@@ -4,9 +4,13 @@
 
 body {
   font-family: Arial, '나눔고딕', 'NanumGothic', 'NanumGothicOTF', 'lucida grande', tahoma, arial, sans-serif;
-  background-image: image-url("main_background.png");
+  background-color: #111;
   margin: 0;
   font-size: 12px;
+
+  &#grey-tile {
+    background-image: image-url("main_background.png");
+  }
 }
 
 div, a {
@@ -16,6 +20,7 @@ div, a {
 a {
   display: inline-block;
 }
+
 
 #main {
   white-space: nowrap;
