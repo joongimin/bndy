@@ -12,7 +12,6 @@ class Swipe
 
     @main.addEventListener "touchstart", (e) -> app.swipe.touchstart(e)
     @main.addEventListener "touchmove", (e) -> app.swipe.touchmove(e)
-    @main.addEventListener "touchleave", (e) -> app.swipe.touchend(e)
     @main.addEventListener "touchend", (e) -> app.swipe.touchend(e)
     @main.addEventListener "touchcancel", (e) -> app.swipe.touchend(e)
 
@@ -26,22 +25,27 @@ class Swipe
       touch = e.touches[0]
       @touch.state = 1
       @touch.x = touch.screenX
+      @touch.y = touch.screenY
 
   touchmove: (e) ->
-    touch = e.touches[0]
     if @touch.state == 1
+      touch = e.touches[0]
       x = touch.screenX - @touch.x
-      threshold = 20
-      if x > threshold || -threshold > x
-        @touch.state = 2
-        @touch.x = touch.screenX
-        @touch.w = @$main.width() * 0.9
-        @page_container.style["pointer-events"] = "none"
-      else
+      y = touch.screenY - @touch.y
+      if Math.abs(y) < Math.abs(x)
+        threshold = 20
+        if x > threshold || -threshold > x
+          @touch.state = 2
+          @touch.x = touch.screenX
+          @touch.w = @$main.width() * 0.9
+          @page_container.style["pointer-events"] = "none"
         e.preventDefault()
         e.stopPropagation()
+      else
+        @touch.state = 3
 
     if @touch.state == 2
+      touch = e.touches[0]
       x = touch.screenX - @touch.x
       if x < -@touch.w
         x = -@touch.w
