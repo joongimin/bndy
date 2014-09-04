@@ -13,6 +13,7 @@ class Comment
         $comment.show()
         setTimeout (->
           $comment.css(opacity: '')
+          $(document).trigger("page:loaded");
           ), 100
         ), 220
       ), 100
