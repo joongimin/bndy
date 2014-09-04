@@ -1,1 +1,4 @@
 $("#comments").html("<%=j render @comments, formats: :html %>");
+if($(".page-3").attr("id") == "page-board"){
+  $(document).trigger("page:loaded");
+}
