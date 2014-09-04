@@ -130,13 +130,15 @@
               <div class="pane-item" id="board-title"><%= image_tag 'board_title.png' %></div>
               <%= form_for Comment.new, remote: true do |f| %>
                 <div id="textarea-container" class="pane-item">
-                  <%= image_tag 'board_field_background.png' %>
+                  <%= image_tag 'board_field_background.png', id: 'board-field-background', data: {width: 832, height: 570} %>
+                  <script>fimg("board-field-background", function(w){return w * 0.9 - 36;});</script>
                   <div>
                     <%= f.text_area :message, maxlength: Settings.max_comment_message_length %>
                   </div>
                 </div>
                 <a class="link-submit" data-target="submit pane-item">
-                  <%= image_tag 'board_submit_button.png' %>
+                  <%= image_tag 'board_submit_button.png', id: 'board-submit-button', data: {width: 832, height: 150} %>
+                  <script>fimg("board-submit-button", function(w){return w * 0.9 - 36;});</script>
                 </a>
               <% end %>
             </div>
