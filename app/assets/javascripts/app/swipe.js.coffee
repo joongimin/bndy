@@ -95,13 +95,12 @@ class Swipe
       ), 200
 
   goto: (page_name) ->
-    new_page = $("#page-" + page_name).data("page")
-    @swipe(if new_page == @total_pages then 1 else 1 - new_page)
+    @swipe(3 - $("#page-" + page_name).data("page"))
 
 
 app.swipe = new Swipe
 $(document).ready ->
   $(document).trigger("page:loaded")
 
-$(".link-swipe").click ->
+$(".link-swipe").on "click", ->
   app.swipe.goto($(this).data("target"))
