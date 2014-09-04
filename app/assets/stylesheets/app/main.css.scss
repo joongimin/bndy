@@ -204,3 +204,11 @@ textarea {
   height: 0;
   @include transition(height 0.22s ease);
 }
+
+img.smooth {
+  opacity: 0;
+  &.loaded {
+    opacity: 1;
+  }
+  @include transition(opacity 0.22s ease-out);
+}
