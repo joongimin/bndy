@@ -7,7 +7,7 @@ class Photo
           app.photo.center_align($(this))
 
     $(window).load ->
-      $("#main").css({opacity: 1});
+      $("body").removeClass("loading")
       $("img.without-url").each ->
         $photo = $(this)
         $photo.attr("src", $photo.data("url")).removeClass("without-url")

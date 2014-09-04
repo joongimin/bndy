@@ -2,9 +2,21 @@
 
 body.photos {
   background-color: #111;
+  @include transition(background-color 0.2s);
+
+  &.loading {
+    background-color: black;
+    #main {
+      opacity: 0;
+    }
+
+    .loader {
+      display: block;
+    }
+  }
 
   #main {
-    opacity: 0;
+    opacity: 1;
     white-space: nowrap;
     @include transition(opacity 0.8s ease);
     height: 100% !important;
@@ -59,5 +71,18 @@ body.photos {
 
   #photo-index-value {
     color: white;
+  }
+}
+
+.loader {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  margin-top: -70px;
+  margin-left: -70px;
+
+  img {
+    width: auto;
   }
 }
