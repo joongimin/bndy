@@ -5,6 +5,20 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
     <%= csrf_meta_tags %>
+    <script>
+      function fimg(id, mw_callback) {
+        var img = document.getElementById(id);
+        if(!img.complete) {
+          var mw = Math.round(mw_callback(window.innerWidth)), w = parseFloat(img.getAttribute("data-width")), h = parseFloat(img.getAttribute("data-height"));
+          img.style.width = mw + "px";
+          img.style.height = Math.round(mw / w * h) + "px";
+          img.onload = function(){
+            this.style.width = "";
+            this.style.height = "";
+          }
+        }
+      }
+    </script>
   </head>
   <body class="home">
     <div id="main" style="height: 934px;">
@@ -12,10 +26,12 @@
         <div class="page page-3" data-page="3" id="page-greeting">
           <div class="col-2">
             <div class="pane">
-              <%= image_tag 'greeting_title.png' %>
+              <%= image_tag 'greeting_title.png', id: 'greeting-title', data: {width: 930, height: 1442} %>
+              <script>fimg("greeting-title", function(w){return w * 0.9 - 16;});</script>
             </div>
             <div class="pane">
-              <%= image_tag 'greeting_intro.png' %>
+              <%= image_tag 'greeting_intro.png', id: 'greeting-intro', data: {width: 930, height: 1401} %>
+              <script>fimg("greeting-intro", function(w){return w * 0.9 - 16;});</script>
             </div>
             <div class="pane">
               <div class="menu">
@@ -29,7 +45,8 @@
         <div class="page page-4" data-page="4" id="page-map">
           <div class="col-2">
             <div class="pane">
-              <div><%= image_tag 'map_map.png' %></div>
+              <%= image_tag 'map_map.png', id: 'map-map', data: {width: 930, height: 1615} %>
+              <script>fimg("map-map", function(w){return w * 0.9 - 16;});</script>
               <div><a href="http://m.map.naver.com/map.nhn?lng=127.0168471&lat=37.5894512&dlevel=11&title=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%B6%81%EA%B5%AC%20%EB%B3%B4%EB%AC%B8%EB%A1%9C%20168&isShowPolygon=false&rcode=09290115&isDetailAddress=true" id="link-naver-map"><%= image_tag 'map_naver_map_button.png' %></a></div>
             </div>
             <div class="pane">
