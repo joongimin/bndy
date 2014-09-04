@@ -127,7 +127,10 @@
         <div class="page page-2" data-page="2" id="page-board">
           <div class="col-2">
             <div class="pane pane-new-comment">
-              <div class="pane-item" id="board-title"><%= image_tag 'board_title.png' %></div>
+              <div class="pane-item" id="board-title">
+                <%= image_tag 'board_title.png', id: 'img-board-title', data: {width: 520, height: 47} %>
+                <script>fimg("img-board-title", function(w){return w * 0.9 - 116;});</script>
+              </div>
               <%= form_for Comment.new, remote: true do |f| %>
                 <div id="textarea-container" class="pane-item">
                   <%= image_tag 'board_field_background.png', id: 'board-field-background', data: {width: 832, height: 570} %>
