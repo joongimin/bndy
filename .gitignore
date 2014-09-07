@@ -24,3 +24,5 @@ config/database.yml
 config/secrets.yml
 db/schema.rb
 sftp-config.json
+
+backup/*

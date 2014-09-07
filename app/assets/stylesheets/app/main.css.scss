@@ -10,6 +10,7 @@ body {
   &.home {
     background-color: #d4d4d4;
     background-image: image-url("main_background.png");
+    background-size: 65;
 
     .photo {
       padding: 5px;
@@ -87,6 +88,16 @@ a {
   line-height: 0;
   box-shadow: 0 2px 3px rgba(0,0,0,.15);
   background-color: white;
+  background-image: image-url("panel_background.png");
+  background-size: 33%;
+
+  &.pane-comment {
+    margin-bottom: 6px;
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
 }
 
 img {
@@ -175,7 +186,11 @@ textarea {
 }
 
 #board-title {
-  padding: 5px 40px 0 40px;
+  padding: 8px 55px 3px 55px;
+}
+
+.link-submit {
+  margin-bottom: 5px;
 }
 
 .pane-comment {
