@@ -4,6 +4,8 @@ class Swipe
       state: 0,
     }
 
+    @default_page_id = "page-greeting"
+    @enable_hash = $("body").hasClass("home")
     @main = document.getElementById("main")
     @$main = $(@main)
     @page_container = document.getElementById("page-container")
@@ -12,15 +14,28 @@ class Swipe
     @page_scale = @$page_container.data("page-scale") || 1
     @max_swipe = @$main.width() * @page_scale
 
-    @main.addEventListener "touchstart", (e) -> app.swipe.touchstart(e)
-    @main.addEventListener "touchmove", (e) -> app.swipe.touchmove(e)
-    @main.addEventListener "touchend", (e) -> app.swipe.touchend(e)
-    @main.addEventListener "touchcancel", (e) -> app.swipe.touchend(e)
+    @main.addEventListener "touchstart", (e) => @touchstart(e)
+    @main.addEventListener "touchmove", (e) => @touchmove(e)
+    @main.addEventListener "touchend", (e) => @touchend(e)
+    @main.addEventListener "touchcancel", (e) => @touchend(e)
 
-    $(document).on "page:loaded", (e) -> app.swipe.pageload(e)
+    $(document).on "page:loaded", (e) => @pageload(e)
+
+    if @enable_hash && window.location.hash
+      @goto(window.location.hash.substring(1), true)
+    else
+      $(document).ready ->
+        $(document).trigger("page:loaded")
 
   pageload: (e) ->
-    @$main.height($(".page-3").height() + 10)
+    $page = $(".page-3")
+    if @enable_hash
+      page_id = $page.attr("id")
+      if page_id == @default_page_id
+        window.location.hash = ""
+      else
+        window.location.hash = page_id.substring(5)
+    @$main.height($page.height() + 10)
 
   touchstart: (e) ->
     if e.touches.length == 1
@@ -69,38 +84,43 @@ class Swipe
       else
         @swipe(0)
         @page_container.style["-webkit-transform"] = "translate3d(0, 0, 0)"
-        setTimeout (->
-          app.swipe.$page_container.removeClass("animating")
-          app.swipe.page_container.style["-webkit-transform"] = "translate3d(0, 0, 0)"
+        setTimeout (=>
+          @$page_container.removeClass("animating")
+          @page_container.style["-webkit-transform"] = "translate3d(0, 0, 0)"
           ), 200
     @touch.state = 0
 
-  swipe: (offset) ->
-    @$page_container.addClass("animating")
-    @page_container.style["-webkit-transform"] = "translate3d(" + (100 * @page_scale * offset) + "%, 0, 0)"
-    setTimeout (->
-      app.swipe.$page_container.removeClass("animating")
-      app.swipe.page_container.style["-webkit-transform"] = "translate3d(0, 0, 0)"
-      if offset != 0
-        $(".page").each ->
-          $page = $(this)
-          old_page = $(this).data("page")
-          new_page = old_page + offset
-          if new_page > app.swipe.total_pages
-            new_page -= app.swipe.total_pages
-          else if new_page <= 0
-            new_page += app.swipe.total_pages
-          $page.data("page", new_page).removeClass("page-" + old_page).addClass("page-" + new_page)
-        $(document).trigger("page:loaded")
-      ), 200
+  swipe: (offset, instant) ->
+    return if offset == 0
+    finalize = =>
+      self = this
+      $(".page").each ->
+        $page = $(this)
+        old_page = $(this).data("page")
+        new_page = old_page + offset
+        if new_page > self.total_pages
+          new_page -= self.total_pages
+        else if new_page <= 0
+          new_page += self.total_pages
+        $page.data("page", new_page).removeClass("page-" + old_page).addClass("page-" + new_page)
+      $(document).trigger("page:loaded")
 
-  goto: (page_name) ->
-    @swipe(3 - $("#page-" + page_name).data("page"))
+    if instant
+      finalize()
+    else
+      @$page_container.addClass("animating")
+      @page_container.style["-webkit-transform"] = "translate3d(" + (100 * @page_scale * offset) + "%, 0, 0)"
+      setTimeout (=>
+        @$page_container.removeClass("animating")
+        @page_container.style["-webkit-transform"] = "translate3d(0, 0, 0)"
+        finalize()
+        ), 200
+
+  goto: (page_name, instant) ->
+    @swipe(3 - $("#page-" + page_name).data("page"), instant)
 
 
 app.swipe = new Swipe
-$(document).ready ->
-  $(document).trigger("page:loaded")
 
 $(".link-swipe").on "click", ->
   app.swipe.goto($(this).data("target"))
